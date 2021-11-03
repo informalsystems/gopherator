@@ -27,14 +27,14 @@ func Executions() [][]core.StepI {
 }
 
 func TestNumberSystem(t *testing.T) {
-	initial_state := &NumberSystem{}
+	initialState := &NumberSystem{}
 
 	testRuns := Executions()
 
 	for i, testRun := range testRuns {
 		name := fmt.Sprintf("test_%v", i)
 		t.Run(name, func(t *testing.T) {
-			if err := core.Check(initial_state, testRun); err != nil {
+			if err := core.Check(initialState, testRun); err != nil {
 				t.Error(err)
 			}
 		})

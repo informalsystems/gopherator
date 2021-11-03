@@ -2,16 +2,16 @@ package core
 
 import "fmt"
 
-// `Step` stores action and a view of state after executing the action on current state
+// StepI stores action and a view of state after executing the action on current state
 type StepI interface{}
 
-// `State` should have `StepRunner` interface to run `Step`s
+// StepRunner interface which a system state should implement
 type StepRunner interface {
 	InitialStep(StepI) error
 	NextStep(StepI) error
 }
 
-// State view and `Step` mismatch
+// StepMismatch error when system state does not match with step view
 type StepMismatch struct {
 	Expected StepI
 	Observed StepRunner
@@ -22,7 +22,8 @@ func (e StepMismatch) Error() string {
 	return fmt.Sprintf("expected: %v, observed: %v, outcome: %v", e.Expected, e.Observed, e.Outcome)
 }
 
-func Check(state StepRunner, steps []StepI) (err error) {
+// Run performs series of steps on system state
+func Run(state StepRunner, steps []StepI) (err error) {
 	for i, step := range steps {
 		if i == 0 {
 			err = state.InitialStep(step)
