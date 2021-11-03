@@ -1,4 +1,13 @@
 # gopherator
-[Modelator][1]'s cousin for Golang
+[Modelator](https://github.com/informalsystems/modelator)'s cousin for Golang
 
-[1]: https://github.com/informalsystems/modelator
+---
+### Example
+[Golang port](https://github.com/informalsystems/gopherator/tree/main/examples/numbersystem) of [NumberSystem](https://github.com/informalsystems/modelator/blob/main/modelator/tests/integration/resource/numbers.rs)
+
+#### Instruction
+```sh
+git clone git@github.com/informalsystems/gopherator
+cd gopherator/examples/numbersystem
+go test -v
+```
