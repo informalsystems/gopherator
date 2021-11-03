@@ -34,7 +34,7 @@ func TestNumberSystem(t *testing.T) {
 	for i, testRun := range testRuns {
 		name := fmt.Sprintf("test_%v", i)
 		t.Run(name, func(t *testing.T) {
-			if err := core.Check(initialState, testRun); err != nil {
+			if err := core.Run(initialState, testRun); err != nil {
 				t.Error(err)
 			}
 		})
