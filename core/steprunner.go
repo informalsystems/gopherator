@@ -15,10 +15,11 @@ type StepRunner interface {
 type StepMismatch struct {
 	Expected StepI
 	Observed StepRunner
+	Outcome  string
 }
 
 func (e StepMismatch) Error() string {
-	return fmt.Sprint(StepMismatch(e))
+	return fmt.Sprintf("expected: %v, observed: %v, outcome: %v", e.Expected, e.Observed, e.Outcome)
 }
 
 func Check(state StepRunner, steps []StepI) (err error) {
