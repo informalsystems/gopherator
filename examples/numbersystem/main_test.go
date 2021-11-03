@@ -26,6 +26,8 @@ func Executions() [][]core.StepI {
 	}
 }
 
+// TODO: add a function that generates executions from Modelator produced json traces
+
 func TestNumberSystem(t *testing.T) {
 	initialState := &NumberSystem{}
 
