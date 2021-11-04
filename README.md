@@ -15,3 +15,24 @@ cd -
 cd examples/numbersystem
 go test -v
 ```
+
+##### Output
+```sh
+=== RUN   TestFixedExecutions
+=== RUN   TestFixedExecutions/test_0
+=== RUN   TestFixedExecutions/test_1
+--- PASS: TestFixedExecutions (0.00s)
+    --- PASS: TestFixedExecutions/test_0 (0.00s)
+    --- PASS: TestFixedExecutions/test_1 (0.00s)
+=== RUN   TestModelBased
+2021/11/04 02:43:48 Generating traces using Modelator...
+=== RUN   TestModelBased/[test:_AMaxBMaxTest,_trace:_0]
+=== RUN   TestModelBased/[test:_AMaxBMinTest,_trace:_0]
+=== RUN   TestModelBased/[test:_AMinBMaxTest,_trace:_0]
+--- PASS: TestModelBased (2.81s)
+    --- PASS: TestModelBased/[test:_AMaxBMaxTest,_trace:_0] (0.00s)
+    --- PASS: TestModelBased/[test:_AMaxBMinTest,_trace:_0] (0.00s)
+    --- PASS: TestModelBased/[test:_AMinBMaxTest,_trace:_0] (0.00s)
+PASS
+ok  	github.com/informalsystems/gopherator/examples/numbersystem	2.809s
+```
