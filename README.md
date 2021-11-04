@@ -8,6 +8,10 @@
 #### Instruction
 ```sh
 git clone git@github.com/informalsystems/gopherator
-cd gopherator/examples/numbersystem
+cd gopherator
+cd third_party/mbt
+cargo build --release
+cd -
+cd examples/numbersystem
 go test -v
 ```
