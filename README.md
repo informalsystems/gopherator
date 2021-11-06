@@ -1,6 +1,7 @@
 # gopherator [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/informalsystems/gopherator.svg)](https://github.com/informalsystems/gopherator) [![Go Report Card](https://goreportcard.com/badge/github.com/informalsystems/gopherator)](https://goreportcard.com/report/github.com/informalsystems/gopherator) [![Go Reference](https://pkg.go.dev/badge/github.com/informalsystems/gopherator.svg)](https://pkg.go.dev/github.com/informalsystems/gopherator) [![License](https://img.shields.io/github/license/informalsystems/gopherator)](https://github.com/informalsystems/gopherator/blob/main/LICENSE)
 [Modelator](https://github.com/informalsystems/modelator)'s cousin for Golang
 
+[<img alt="Gopherator" src="https://github.com/informalsystems/gopherator/blob/main/assets/images/matrix_gopherator.png?raw=true" height="250">](https://youtu.be/wW1ar7onzuc)
 ---
 ### Example
 [Golang port](https://github.com/informalsystems/gopherator/tree/main/examples/numbersystem) of [NumberSystem](https://github.com/informalsystems/modelator/blob/main/modelator/tests/integration/resource/numbers.rs)
