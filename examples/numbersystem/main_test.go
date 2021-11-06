@@ -42,12 +42,7 @@ func TestFixedExecutions(t *testing.T) {
 }
 
 func TestModelBased(t *testing.T) {
-	jsonTraces, err := core.GenerateJSONTracesFromTLATests("NumbersTest.tla", "Numbers.cfg")
-	if err != nil {
-		// TODO: ignoring error to avoid `bad address` from Rust side
-		// log.Println(err)
-		// t.Fatal("Modelator error")
-	}
+	jsonTraces := core.GenerateJSONTracesFromTLATests("NumbersTest.tla", "Numbers.cfg")
 	var tests map[string][][]Step
 	json.Unmarshal([]byte(jsonTraces), &tests)
 	for name, testRuns := range tests {
