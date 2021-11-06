@@ -25,7 +25,7 @@ go test -v
     --- PASS: TestFixedExecutions/test_0 (0.00s)
     --- PASS: TestFixedExecutions/test_1 (0.00s)
 === RUN   TestModelBased
-2021/11/04 02:43:48 Generating traces using Modelator...
+2021/11/04 02:43:48 Generating traces using Modelator (rs-binding)...
 === RUN   TestModelBased/[test:_AMaxBMaxTest,_trace:_0]
 === RUN   TestModelBased/[test:_AMaxBMinTest,_trace:_0]
 === RUN   TestModelBased/[test:_AMinBMaxTest,_trace:_0]

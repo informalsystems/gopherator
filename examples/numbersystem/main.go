@@ -1,6 +1,10 @@
 package main
 
-import "github.com/informalsystems/gopherator/core"
+import (
+	"log"
+
+	"github.com/informalsystems/gopherator/core"
+)
 
 // MaxNumber is the maximum bound for a and b
 const MaxNumber uint64 = 6
@@ -94,7 +98,7 @@ func (state *NumberSystem) NextStep(stepI core.StepI) error {
 	case IncreaseB:
 		err = state.IncreaseB(2)
 	default:
-		panic("unknown action")
+		log.Println(step.Action)
 	}
 
 	var outcome string

@@ -1,6 +1,15 @@
 package core
 
-import "fmt"
+/*
+#cgo LDFLAGS: -L ../third_party/mbt/target/release -lmbt -ldl -lm
+#include "../third_party/mbt/src/lib.h"
+*/
+import "C"
+
+import (
+	"fmt"
+	"log"
+)
 
 // StepI stores action and a view of state after executing the action on current state
 type StepI interface{}
@@ -35,4 +44,13 @@ func Run(state StepRunner, steps []StepI) (err error) {
 		}
 	}
 	return nil
+}
+
+// GenerateJSONTracesFromTLATests generates model traces from TLA specs and tests
+func GenerateJSONTracesFromTLATests(tlaFile, cfgFile string) (string, error) {
+	cTlaFile := C.CString(tlaFile)
+	cCfgFile := C.CString(cfgFile)
+	log.Printf("Generating traces using Modelator (rs-binding)...")
+	res, err := C.generate_json_traces_from_tla_tests_rs(cTlaFile, cCfgFile)
+	return C.GoString(res), err
 }

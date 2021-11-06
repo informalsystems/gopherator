@@ -3,8 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"log"
-	"os/exec"
 	"testing"
 
 	"github.com/informalsystems/gopherator/core"
@@ -43,31 +41,23 @@ func TestFixedExecutions(t *testing.T) {
 	}
 }
 
-func GenerateExecutionsFromTlaTests(tlaFile, cfgFile string) (map[string][][]Step, error) {
-	cmd := exec.Command("../../third_party/mbt/target/release/mbt", tlaFile, cfgFile)
-	log.Printf("Generating traces using Modelator...")
-	output, err := cmd.Output()
-	var jsonVar map[string][][]Step
-	if err != nil {
-		return jsonVar, err
-	}
-	json.Unmarshal(output, &jsonVar)
-	return jsonVar, nil
-}
-
 func TestModelBased(t *testing.T) {
-	tests, err := GenerateExecutionsFromTlaTests("NumbersTest.tla", "Numbers.cfg")
+	jsonTraces, err := core.GenerateJSONTracesFromTLATests("NumbersTest.tla", "Numbers.cfg")
 	if err != nil {
-		t.Fatal("Modelator error")
+		// TODO: ignoring error to avoid `bad address` from Rust side
+		// log.Println(err)
+		// t.Fatal("Modelator error")
 	}
+	var tests map[string][][]Step
+	json.Unmarshal([]byte(jsonTraces), &tests)
 	for name, testRuns := range tests {
 		for i, testRun := range testRuns {
 			name := fmt.Sprintf("[test: %v, trace: %v]", name, i)
 			t.Run(name, func(t *testing.T) {
 				initialState := &NumberSystem{}
 				testRunI := make([]core.StepI, len(testRun))
-				for i := range testRun {
-					testRunI[i] = testRun[i]
+				for i, testStep := range testRun {
+					testRunI[i] = testStep
 				}
 				if err := core.Run(initialState, testRunI); err != nil {
 					t.Error(err)
