@@ -6,6 +6,12 @@ import (
 	"github.com/informalsystems/gopherator/pkg/core"
 )
 
+// compile time check if steprunner interfaces are implemented
+var (
+	_ core.StepRunner = &NumberSystem{}
+	_ core.StepI      = Step{}
+)
+
 // MaxNumber is the maximum bound for a and b
 const MaxNumber uint64 = 6
 
@@ -72,8 +78,8 @@ func (state *NumberSystem) IncreaseB(n uint64) error {
 
 // InitialStep initialize system state with initial values
 func (state *NumberSystem) InitialStep(stepI core.StepI) error {
-	step, success := stepI.(Step)
-	if !success {
+	step, ok := stepI.(Step)
+	if !ok {
 		return NumberSystemError("Failed to cast step interface to concrete step type")
 	}
 	state.A = step.A
@@ -84,8 +90,8 @@ func (state *NumberSystem) InitialStep(stepI core.StepI) error {
 
 // NextStep performs given step and modifies the current state
 func (state *NumberSystem) NextStep(stepI core.StepI) error {
-	step, success := stepI.(Step)
-	if !success {
+	step, ok := stepI.(Step)
+	if !ok {
 		return NumberSystemError("Failed to cast step interface to concrete step type")
 	}
 	var err error
