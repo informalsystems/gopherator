@@ -10,11 +10,10 @@
 ```sh
 git clone git@github.com/informalsystems/gopherator
 cd gopherator
-cd third_party/mbt
-cargo build --release
-cd -
-cd examples/numbersystem
-go test -v
+// Build modelator library
+cargo build --release --manifest-path third_party/mbt/Cargo.toml
+// Test Golang examples
+go test -v ./examples/...
 ```
 
 ##### Output
@@ -26,14 +25,14 @@ go test -v
     --- PASS: TestFixedExecutions/test_0 (0.00s)
     --- PASS: TestFixedExecutions/test_1 (0.00s)
 === RUN   TestModelBased
-2021/11/04 02:43:48 Generating traces using Modelator (rs-binding)...
+2021/11/08 15:15:26 Generating traces using Modelator cgo-binding...
 === RUN   TestModelBased/[test:_AMaxBMaxTest,_trace:_0]
 === RUN   TestModelBased/[test:_AMaxBMinTest,_trace:_0]
 === RUN   TestModelBased/[test:_AMinBMaxTest,_trace:_0]
---- PASS: TestModelBased (2.81s)
+--- PASS: TestModelBased (2.79s)
     --- PASS: TestModelBased/[test:_AMaxBMaxTest,_trace:_0] (0.00s)
     --- PASS: TestModelBased/[test:_AMaxBMinTest,_trace:_0] (0.00s)
     --- PASS: TestModelBased/[test:_AMinBMaxTest,_trace:_0] (0.00s)
 PASS
-ok  	github.com/informalsystems/gopherator/examples/numbersystem	2.809s
+ok  	github.com/informalsystems/gopherator/examples/numbersystem	2.792s
 ```
