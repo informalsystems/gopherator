@@ -1,6 +1,7 @@
 # gopherator
 [![GitHub go.mod Go version](https://img.shields.io/github/go-mod/go-version/informalsystems/gopherator.svg)](https://github.com/informalsystems/gopherator)
 [![Go Reference](https://pkg.go.dev/badge/github.com/informalsystems/gopherator.svg)](https://pkg.go.dev/github.com/informalsystems/gopherator)
+[![Status](https://github.com/informalsystems/gopherator/actions/workflows/ci.yml/badge.svg)](https://github.com/informalsystems/gopherator/actions/workflows/ci.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/informalsystems/gopherator)](https://goreportcard.com/report/github.com/informalsystems/gopherator)
 [![License](https://img.shields.io/github/license/informalsystems/gopherator)](https://github.com/informalsystems/gopherator/blob/main/LICENSE)
 
