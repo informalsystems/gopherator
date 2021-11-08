@@ -9,7 +9,7 @@
 
 [<img alt="Gopherator" src="https://github.com/informalsystems/gopherator/blob/main/assets/images/matrix_gopherator.png?raw=true" height="250">](https://youtu.be/wW1ar7onzuc)
 ---
-#### Instruction
+### Instruction
 ```sh
 git clone git@github.com/informalsystems/gopherator
 cd gopherator
