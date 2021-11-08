@@ -50,7 +50,7 @@ func Run(state StepRunner, steps []StepI) (err error) {
 func GenerateJSONTracesFromTLATests(tlaFile, cfgFile string) string {
 	cTlaFile := C.CString(tlaFile)
 	cCfgFile := C.CString(cfgFile)
-	log.Printf("Generating traces using Modelator (rs-binding)...")
+	log.Printf("Generating traces using Modelator cgo-binding...")
 	// https://utcc.utoronto.ca/~cks/space/blog/programming/GoCgoErrorReturns
 	// ignoring errno from C
 	res := C.generate_json_traces_from_tla_tests_rs(cTlaFile, cCfgFile)
