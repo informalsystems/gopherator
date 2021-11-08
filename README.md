@@ -16,9 +16,9 @@
 ```sh
 git clone git@github.com/informalsystems/gopherator
 cd gopherator
-// Build modelator library
+# Build modelator library
 cargo build --release --manifest-path third_party/mbt/Cargo.toml
-// Test Golang examples
+# Test Golang examples
 go test -v ./examples/...
 ```
 
