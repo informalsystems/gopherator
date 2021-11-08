@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/informalsystems/gopherator/core"
+	"github.com/informalsystems/gopherator/pkg/core"
 )
 
 // MaxNumber is the maximum bound for a and b
