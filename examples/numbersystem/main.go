@@ -72,9 +72,9 @@ func (state *NumberSystem) IncreaseB(n uint64) error {
 
 // InitialStep initialize system state with initial values
 func (state *NumberSystem) InitialStep(stepI core.StepI) error {
-	step, err := stepI.(Step)
-	if !err {
-		panic("error")
+	step, success := stepI.(Step)
+	if !success {
+		return NumberSystemError("Failed to cast step interface to concrete step type")
 	}
 	state.A = step.A
 	state.B = step.B
@@ -84,9 +84,9 @@ func (state *NumberSystem) InitialStep(stepI core.StepI) error {
 
 // NextStep performs given step and modifies the current state
 func (state *NumberSystem) NextStep(stepI core.StepI) error {
-	step, err1 := stepI.(Step)
-	if !err1 {
-		panic("error")
+	step, success := stepI.(Step)
+	if !success {
+		return NumberSystemError("Failed to cast step interface to concrete step type")
 	}
 	var err error
 	// Execute the action, and check the outcome
