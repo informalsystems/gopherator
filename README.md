@@ -9,17 +9,24 @@
 
 [<img alt="Gopherator" src="https://github.com/informalsystems/gopherator/blob/main/assets/images/matrix_gopherator.png?raw=true" height="250">](https://youtu.be/wW1ar7onzuc)
 ---
-### Example
-[Golang port](https://github.com/informalsystems/gopherator/tree/main/examples/numbersystem) of [NumberSystem](https://github.com/informalsystems/modelator/blob/main/modelator/tests/integration/resource/numbers.rs)
-
 #### Instruction
 ```sh
 git clone git@github.com/informalsystems/gopherator
 cd gopherator
-# Build modelator library
+# Build modelator library (one time)
 cargo build --release --manifest-path third_party/mbt/Cargo.toml
-# Test Golang examples
+# Test all examples
 go test -v ./examples/...
+```
+
+### Example
+[Golang port](https://github.com/informalsystems/gopherator/tree/main/examples/numbersystem) of [NumberSystem](https://github.com/informalsystems/modelator/blob/main/modelator/tests/integration/resource/numbers.rs)
+
+```sh
+# Build modelator library (if not built already)
+cargo build --release --manifest-path third_party/mbt/Cargo.toml
+# Test NumberSystem example
+go test -v ./examples/numbersystem
 ```
 
 ##### Output
