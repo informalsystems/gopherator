@@ -1,5 +1,5 @@
 use std::collections::BTreeMap;
-use std::ffi::CString;
+use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
 
 pub fn generate_json_traces_from_tla_tests(
@@ -51,13 +51,13 @@ where
 
 #[no_mangle]
 pub extern "C" fn generate_json_traces_from_tla_tests_rs(
-    tla_tests_file_path_c: *mut c_char,
-    tla_config_file_path_c: *mut c_char,
+    tla_tests_file_path_c: *const c_char,
+    tla_config_file_path_c: *const c_char,
 ) -> CResult {
     let (tla_tests_file_path, tla_config_file_path) = unsafe {
         (
-            CString::from_raw(tla_tests_file_path_c),
-            CString::from_raw(tla_config_file_path_c),
+            CStr::from_ptr(tla_tests_file_path_c),
+            CStr::from_ptr(tla_config_file_path_c),
         )
     };
     generate_json_traces_from_tla_tests(
