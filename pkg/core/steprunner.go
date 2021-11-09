@@ -58,9 +58,10 @@ func GenerateJSONTracesFromTLATests(tlaFile, cfgFile string) (string, error) {
 	cTlaFile := C.CString(tlaFile)
 	cCfgFile := C.CString(cfgFile)
 	log.Printf("Generating traces using Modelator cgo-binding...")
+	res, _ := C.generate_json_traces_from_tla_tests_rs(cTlaFile, cCfgFile)
 	// https://utcc.utoronto.ca/~cks/space/blog/programming/GoCgoErrorReturns
 	// ignoring errno from C
-	res := C.generate_json_traces_from_tla_tests_rs(cTlaFile, cCfgFile)
+	// log.Printf("errno: %v\n", errno.(syscall.Errno))
 	if res.error != nil {
 		return "", ModelatorError(C.GoString(res.error))
 	} else {
