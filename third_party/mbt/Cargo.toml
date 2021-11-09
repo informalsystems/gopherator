@@ -11,5 +11,6 @@ authors = [
 crate-type = ["staticlib"]
 
 [dependencies]
+anyhow = "1.0.45"
 modelator = { git = "https://github.com/informalsystems/modelator" }
 serde_json = "1.0.68"
