@@ -42,7 +42,10 @@ func TestFixedExecutions(t *testing.T) {
 }
 
 func TestModelBased(t *testing.T) {
-	jsonTraces := core.GenerateJSONTracesFromTLATests("NumbersTest.tla", "Numbers.cfg")
+	jsonTraces, err := core.GenerateJSONTracesFromTLATests("NumbersTest1.tla", "Numbers.cfg")
+	if err != nil {
+		t.Error(err)
+	}
 	var tests map[string][][]Step
 	json.Unmarshal([]byte(jsonTraces), &tests)
 	for name, testRuns := range tests {

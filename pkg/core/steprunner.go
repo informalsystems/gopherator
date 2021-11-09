@@ -31,6 +31,13 @@ func (e StepMismatch) Error() string {
 	return fmt.Sprintf("expected: %v, observed: %v, outcome: %v", e.Expected, e.Observed, e.Outcome)
 }
 
+// ModelatorError when modelator throws an error
+type ModelatorError string
+
+func (e ModelatorError) Error() string {
+	return fmt.Sprintf("[Modelator]: %v", string(e))
+}
+
 // Run performs series of steps on system state
 func Run(state StepRunner, steps []StepI) (err error) {
 	for i, step := range steps {
@@ -47,12 +54,16 @@ func Run(state StepRunner, steps []StepI) (err error) {
 }
 
 // GenerateJSONTracesFromTLATests generates model traces from TLA specs and tests
-func GenerateJSONTracesFromTLATests(tlaFile, cfgFile string) string {
+func GenerateJSONTracesFromTLATests(tlaFile, cfgFile string) (string, error) {
 	cTlaFile := C.CString(tlaFile)
 	cCfgFile := C.CString(cfgFile)
 	log.Printf("Generating traces using Modelator cgo-binding...")
 	// https://utcc.utoronto.ca/~cks/space/blog/programming/GoCgoErrorReturns
 	// ignoring errno from C
 	res := C.generate_json_traces_from_tla_tests_rs(cTlaFile, cCfgFile)
-	return C.GoString(res)
+	if C.GoString(res.error) != "" {
+		return "", ModelatorError(C.GoString(res.error))
+	} else {
+		return C.GoString(res.json), nil
+	}
 }
