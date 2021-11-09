@@ -42,7 +42,7 @@ func TestFixedExecutions(t *testing.T) {
 }
 
 func TestModelBased(t *testing.T) {
-	jsonTraces, err := core.GenerateJSONTracesFromTLATests("NumbersTest1.tla", "Numbers.cfg")
+	jsonTraces, err := core.GenerateJSONTracesFromTLATests("NumbersTest.tla", "Numbers.cfg")
 	if err != nil {
 		t.Error(err)
 	}
