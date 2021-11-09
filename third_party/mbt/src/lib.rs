@@ -26,8 +26,27 @@ pub fn generate_json_traces_from_tla_tests(
 
 #[repr(C)]
 pub struct CResult {
-    json: *mut c_char,
+    data: *mut c_char,
     error: *mut c_char,
+}
+
+impl<R, E> From<Result<R, E>> for CResult
+where
+    R: ToString,
+    E: ToString,
+{
+    fn from(result: Result<R, E>) -> Self {
+        match result {
+            Ok(ok) => Self {
+                data: CString::new(ok.to_string()).unwrap().into_raw(),
+                error: std::ptr::null_mut(),
+            },
+            Err(error) => Self {
+                data: std::ptr::null_mut(),
+                error: CString::new(error.to_string()).unwrap().into_raw(),
+            },
+        }
+    }
 }
 
 #[no_mangle]
@@ -35,17 +54,15 @@ pub extern "C" fn generate_json_traces_from_tla_tests_rs(
     tla_tests_file_path_c: *mut c_char,
     tla_config_file_path_c: *mut c_char,
 ) -> CResult {
-    let tla_tests_file_path = unsafe { CString::from_raw(tla_tests_file_path_c) };
-    let tla_config_file_path = unsafe { CString::from_raw(tla_config_file_path_c) };
-    let (json_string, error_string) = match generate_json_traces_from_tla_tests(
+    let (tla_tests_file_path, tla_config_file_path) = unsafe {
+        (
+            CString::from_raw(tla_tests_file_path_c),
+            CString::from_raw(tla_config_file_path_c),
+        )
+    };
+    generate_json_traces_from_tla_tests(
         tla_tests_file_path.to_str().unwrap(),
         tla_config_file_path.to_str().unwrap(),
-    ) {
-        Ok(json) => (json, String::new()),
-        Err(error) => (String::new(), format!("{:?}", error)),
-    };
-    CResult {
-        json: CString::new(json_string).unwrap().into_raw(),
-        error: CString::new(error_string).unwrap().into_raw(),
-    }
+    )
+    .into()
 }

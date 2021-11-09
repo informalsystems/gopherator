@@ -1,5 +1,7 @@
+// cbindgen --lang=c
+
 typedef struct CResult {
-  char *json;
+  char *data;
   char *error;
 } CResult;
 
